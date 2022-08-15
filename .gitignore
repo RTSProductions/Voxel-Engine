@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+Voxel Game
 
 # Extra
 .DS_Store

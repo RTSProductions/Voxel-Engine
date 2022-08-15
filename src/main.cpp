@@ -1,8 +1,10 @@
-#include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
+#include <glm/glm.hpp>
+#include <shaders.hpp>
 #define SCREEN_WIDTH 640
-#define SCREEN_HIEGHT 480
+#define SCREEN_HEIGHT 480
 
 // ———————————No Voxels?———————————
 // ⠀⣞⢽⢪⢣⢣⢣⢫⡺⡵⣝⡮⣗⢷⢽⢽⢽⣮⡷⡽⣜⣜⢮⢺⣜⢷⢽⢝⡽⣝
@@ -18,7 +20,15 @@
 // ⠀⠀⠀⣴⣿⣾⣿⣿⣿⡿⡽⡑⢌⠪⡢⡣⣣⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 // ⠀⠀⠀⡟⡾⣿⢿⢿⢵⣽⣾⣼⣘⢸⢸⣞⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 // ⠀⠀⠀⠀⠁⠇⠡⠩⡫⢿⣝⡻⡮⣒⢽⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-// —————————————————————————————
+// —————————————————————————————-
+
+//Keyboard input
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    //Check for what key is pressed
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, GLFW_TRUE);
+}
 
 int main()
 {
@@ -42,7 +52,7 @@ int main()
 
 
     //Create a windowed mode window and its OpenGL context
-    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HIEGHT, "Voxel Engine", NULL, NULL);
+    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Voxel Engine", NULL, NULL);
     if (!window)
     {
         std::cout << "Failed create GLFW window" << std::endl;
@@ -53,13 +63,25 @@ int main()
     //Make the window's context current
     glfwMakeContextCurrent(window);
 
-    gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
+    {
+        std::cout << "Failed to load glad" << std::endl;
+        return -1;
+    }
+
+    //Set up key input reading
+    glfwSetKeyCallback(window, keyCallback);
+
+    //Scale the viewport
+    glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     //Loop until the user closes the window
     while (!glfwWindowShouldClose(window))
     {
-        //Render here
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        //Set the clear color
+        glClearColor(0.980392, 0.466667, 0.431373, 1);
+
+        // Clear the screan
         glClear(GL_COLOR_BUFFER_BIT);
 
         //Swap front and back buffers

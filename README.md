@@ -15,7 +15,7 @@ this is a voxel engine writtin in [C++](https://cplusplus.com) with [OpenGL](htt
 
 ## Compilation
 
-While this project may be compiled **FOR** systems like Windows or Linux it does not mean it can be compiled **ON** those systems. This is because I have developed this project souly on MacOS and so you may have to edit the makefile for your specific needs on your specific system. If you are going to try to compile it you should know
+While this project may be compiled **FOR** systems like Windows or Linux it does not mean it can be compiled **ON** those systems. This is because I have developed this project soley on MacOS and so you may have to edit the makefile for your specific needs on your specific system. If you are going to try to compile it you should know
 
 1). glad is using core profile
 
